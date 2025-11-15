@@ -1,0 +1,16 @@
+Flask
+Flask-SQLAlchemy
+SQLAlchemy
+Flask-Migrate
+python-dotenv
+Werkzeug
+torch
+torchvision
+ultralytics
+opencv-python
+numpy
+matplotlib
+requests
+pymysql
+cryptography
+gunicorn
