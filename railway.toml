@@ -1,8 +1,5 @@
 [build]
-builder = "NIXPACKS"
+builder = "DOCKERFILE"
 
 [deploy]
-start = "gunicorn --bind 0.0.0.0:${PORT:-8000} main:app"
-
-[phases.setup]
-nixPkgs = ["python312"]
+start = "gunicorn --bind 0.0.0.0:${PORT:-8000} run_app:app"
