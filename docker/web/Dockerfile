@@ -1,29 +1,32 @@
-FROM python:3.11-slim
+FROM python:3.12-slim
 
 WORKDIR /app
 
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
-# Install system dependencies for OpenCV and other packages
+# Install system dependencies for OpenCV headless and other packages
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libglib2.0-0 \
     libgl1 \
     libsm6 \
     libxext6 \
     libxrender-dev \
+    ffmpeg \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy requirements and install first for better caching
 COPY requirements.txt /app/requirements.txt
 
-RUN pip install --upgrade pip
-RUN pip install -r /app/requirements.txt
+# Upgrade pip and install Python packages without cache to reduce image size
+RUN pip install --no-cache-dir --upgrade pip
+RUN pip install --no-cache-dir -r /app/requirements.txt
 
 # Copy the application code
 COPY . /app
 
-EXPOSE 5000
+# Expose port (Railway uses $PORT automatically)
+EXPOSE 8000
 
-# Give the database time to be ready, then run migrations and start app
-CMD ["sh", "-c", "sleep 10 && flask db upgrade || true && python run_app.py"]
+# Production-ready start using Gunicorn
+CMD ["gunicorn", "--bind", "0.0.0.0:${PORT:-8000}", "run_app:app"]
