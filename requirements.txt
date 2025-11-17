@@ -4,13 +4,23 @@ SQLAlchemy
 Flask-Migrate
 python-dotenv
 Werkzeug
-torch==2.2.0+cpu --extra-index-url https://download.pytorch.org/whl/cpu
-torchvision==0.17.0+cpu --extra-index-url https://download.pytorch.org/whl/cpu
+
+# PyTorch CPU (Railway-friendly)
+torch==2.2.2
+torchvision==0.17.2
+
+# YOLOv8
 ultralytics==8.0.215
-opencv-python
+
+# CV + Utils
+opencv-python==4.8.1.78
 numpy
 matplotlib
 requests
+
+# Database + Security
 pymysql
 cryptography
+
+# Production server
 gunicorn
