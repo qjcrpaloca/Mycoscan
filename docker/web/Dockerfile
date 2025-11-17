@@ -1,3 +1,4 @@
+# Use Python 3.12 slim for smaller image and PyTorch CPU compatibility
 FROM python:3.12-slim
 
 WORKDIR /app
@@ -15,18 +16,18 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ffmpeg \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements and install first for better caching
+# Copy requirements and install first for caching
 COPY requirements.txt /app/requirements.txt
 
-# Upgrade pip and install Python packages without cache to reduce image size
+# Upgrade pip and install packages without cache to reduce image size
 RUN pip install --no-cache-dir --upgrade pip
 RUN pip install --no-cache-dir -r /app/requirements.txt
 
-# Copy the application code
+# Copy the rest of your application code
 COPY . /app
 
-# Expose port (Railway uses $PORT automatically)
+# Expose the default port (Railway uses $PORT automatically)
 EXPOSE 8000
 
-# Production-ready start using Gunicorn
+# Start Flask app using Gunicorn for production
 CMD ["gunicorn", "--bind", "0.0.0.0:${PORT:-8000}", "run_app:app"]
