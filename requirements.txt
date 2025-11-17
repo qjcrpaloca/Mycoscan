@@ -1,3 +1,4 @@
+# Core Flask and DB
 Flask
 Flask-SQLAlchemy
 SQLAlchemy
@@ -5,20 +6,19 @@ Flask-Migrate
 python-dotenv
 Werkzeug
 
-# PyTorch CPU (Railway-friendly)
+# PyTorch CPU-only (compatible with Python 3.12)
 torch==2.2.2
 torchvision==0.17.2
 
 # YOLOv8
 ultralytics==8.0.215
 
-# CV + Utils
-opencv-python==4.8.1.78
-numpy
-matplotlib
-requests
+# OpenCV headless for smaller image size
+opencv-python-headless==4.8.1.78
 
-# Database + Security
+# Utilities
+numpy
+requests
 pymysql
 cryptography
 
