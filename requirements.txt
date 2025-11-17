@@ -4,9 +4,9 @@ SQLAlchemy
 Flask-Migrate
 python-dotenv
 Werkzeug
-torch
-torchvision
-ultralytics
+torch==2.2.0+cpu --extra-index-url https://download.pytorch.org/whl/cpu
+torchvision==0.17.0+cpu --extra-index-url https://download.pytorch.org/whl/cpu
+ultralytics==8.0.215
 opencv-python
 numpy
 matplotlib
